@@ -13,7 +13,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: 192.168.100.100:888/cicd/nginx:v1
+      - image: nginx:latest
         name: nginx
         ports:
         - containerPort: 80
