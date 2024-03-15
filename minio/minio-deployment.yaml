@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: minio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+      - name: minio
+        env:
+        - name: MINIO_ROOT_USER
+          value: "admin"
+        - name: MINIO_ROOT_PASSWORD
+          value: "root123456"
+        image: minio/minio:latest
+        imagePullPolicy: IfNotPresent
+        command:
+          - /bin/sh
+          - -c
+          - minio server /data --console-address ":5000"
+        ports:
+        - name: data
+          containerPort: 9000
+          protocol: "TCP"
+        - name: console
+          containerPort: 5000
+          protocol: "TCP"
+ 
+ 
+ 
